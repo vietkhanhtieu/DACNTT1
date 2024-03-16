@@ -1,5 +1,5 @@
 // Trong file api.js
-const API_BASE_URL = 'http://172.17.12.198:7218/api';
+const API_BASE_URL = 'http://42.96.5.250:7218/api';
 const API_KEY = '6CBxzdYcEgNDrRhMbDpkBF7e4d4Kib46dwL9ZE5egiL0iL5Y3dzREUBSUYVUwUkN';
 
 export const fetchAPI = async (endpoint, options = {}) => {
