@@ -75,7 +75,6 @@ const App = () => {
         <Text style={styles.hrText}> HỒ SƠ NHÂN SỰ</Text>
         <View style={styles.featureSection}>
             <FeatureButton imageSource={require('../assets/images/ion_folder-outline.jpg')} label="Hồ sơ nhân sự" targetScreen="ProfileManagementScreen"/>
-            <FeatureButton imageSource={require('../assets/images/profile.jpg')} label="Hợp đồng" />
         </View>
       </View>
     
