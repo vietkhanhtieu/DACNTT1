@@ -36,5 +36,15 @@
         public string Sodienthoai { get; set; } = null!;
 
         public string Diachi { get; set; } = null!;
+
+        public void Validate()
+        {
+            if (string.IsNullOrEmpty(Hoten))
+            {
+                throw new ArgumentNullException("Vui lòng nhập họ tên của nhân viên");
+            }
+        }
     }
+
+    
 }

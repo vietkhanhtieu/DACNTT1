@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, TextInput, Image, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, TextInput, Image, TouchableOpacity, ScrollView, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
 import { fetchAPI } from '../apiConfig.js'; 
 import { useUser } from '../components/UserContext.js';
 import Loader from '../components/Loader.js';
+import showAlert from '../Services/alertServices.js';
 
 
 const ProfileScreen = ({route}) => {
@@ -79,7 +80,7 @@ const ProfileScreen = ({route}) => {
 
   const updateUserProfile = async () => {
     if(user.chucvu != "admin"){
-      alert("Bạn không có quyền thực hiện chức năng này");
+      showAlert("Bạn không có quyền thực hiện chức năng này");
       return;
     }
     const payload = {
@@ -97,14 +98,15 @@ const ProfileScreen = ({route}) => {
         setTimeout(() => {
           setLoading(false); // Sẽ được thực thi sau 1 giây
         }, 2000); // 1000 mili giây = 1 giây
-        alert("Cập nhật thông tin thành công");
+        showAlert("Cập nhật thông tin thành công");
+
       } 
       else{
         console.log("Error updating user profile: ", response.message);
         setTimeout(() => {
           setLoading(false); // Sẽ được thực thi sau 1 giây
         }, 2000); // 1000 mili giây = 1 giây
-        alert("Cập nhật thông tin không thành công");
+        showAlert("Cập nhật thông tin không thành công");
       }
     } catch (error) {
       console.error("Error fetching attendance data:", error);

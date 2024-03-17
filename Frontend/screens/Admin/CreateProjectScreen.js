@@ -8,6 +8,7 @@ import { useUser } from '../../components/UserContext.js';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { fetchAPI } from '../../apiConfig.js'; 
+import showAlert from '../../Services/alertServices.js';
 
 
 
@@ -59,7 +60,9 @@ const TaskDetailScreen = () => {
       };
       const handleSubmitButton = async () => {
         if (!description) {
-          alert('Vui lòng nhập mô tả công việc');
+          showAlert("Vui lòng nhập mô tả công việc");
+
+
           return;
         }
         try {
@@ -84,7 +87,7 @@ const TaskDetailScreen = () => {
             }
           } else {
             // Handle the failure scenario
-            alert('Something went wrong');
+            showAlert("Tạo dự án không thành công");
           }
         } catch (error) {
           // Handle the error scenario

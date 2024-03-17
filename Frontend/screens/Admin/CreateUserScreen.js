@@ -6,6 +6,8 @@ import { useNavigation } from '@react-navigation/native';
 import { format } from 'date-fns';
 import { Dropdown } from 'react-native-element-dropdown';
 import { fetchAPI } from '../../apiConfig.js'; 
+import showAlert from '../../Services/alertServices.js';
+
 
 
 
@@ -47,7 +49,60 @@ const App = () => {
       setngayCap(currentDate);
     };
 
+    const validateInput = (content, message) => {
+      if(!content){
+        showAlert("Vui lòng nhập " + message);
+        return false;
+      }
+      return true;
+    };
+
     const handleSubmitButton = async () => {
+      if(!validateInput(userName, "tên nhân viên")){
+        return
+      };
+      if(!validateInput(email, "email nhân viên")){
+        return
+      };
+      if(!validateInput(emailUser, "email cá nhân")){
+        return
+      };
+      if(!validateInput(password, "mật khẩu")){
+        return
+      };
+      if(!validateInput(rule, "vai trò")){
+        return
+      };
+      if(!validateInput(birthday, "ngày sinh")){
+        return
+      };
+      if(!validateInput(sex, "giới tính")){
+        return
+      };
+      if(!validateInput(phone, "số điện thoại")){
+        return
+      };
+      if(!validateInput(cccd, "căng cước công dân")){
+        return
+      };
+      if(!validateInput(ngayCap, "ngày cấp")){
+        return
+      };
+      if(!validateInput(noiCap, "nơi cấp")){
+        return
+      };
+      if(!validateInput(dantoc, "dân tộc")){
+        return
+      };
+      if(!validateInput(hocVan, "học vấn")){
+        return
+      };
+      if(!validateInput(address, "địa chỉ thường trú")){
+        return
+      };
+      if(!validateInput(country, "quốc tịch")){
+        return
+      };
       try {
         const response = await fetchAPI('Nguoidung', {
           method: 'POST',
@@ -78,7 +133,7 @@ const App = () => {
         if (response.success == 1) {
           navigation.navigate('ProfileManagementScreen');
         } else {
-          console.log('Error or something else', response);
+          showAlert(response.message);
         }
       } catch (error) {
         console.error('An error occurred:', error);

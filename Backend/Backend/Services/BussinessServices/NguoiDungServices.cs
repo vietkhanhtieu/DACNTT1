@@ -3,6 +3,7 @@ using Backend.Models;
 using Backend.Models.Dtos;
 using Backend.Request;
 using Backend.Services.RepositoryServices;
+using System.ComponentModel.DataAnnotations;
 
 namespace Backend.Services.BussinessServices
 {
@@ -63,6 +64,7 @@ namespace Backend.Services.BussinessServices
             PostDto result = new PostDto();
             try
             {
+                nguoiDungRequest.Validate();
                 Nguoidung nguoiDung = await FindByIdAsync(nguoiDungRequest.Manguoidung);
                 if (nguoiDung == null)
                 {

@@ -1,11 +1,13 @@
 import React, { useState, createRef, useContext } from 'react';
-import { StyleSheet, Text, View, Button, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, TouchableOpacity, Alert } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { CheckBox } from 'react-native-elements';
 import Loader from '../components/Loader.js';
 import {LinearGradient} from 'expo-linear-gradient';
 import {useUser} from '../components/UserContext.js';
-import { fetchAPI } from '../apiConfig.js'; 
+import { fetchAPI } from '../apiConfig.js';
+import showAlert from '../Services/alertServices.js';
+
 
 
 
@@ -23,11 +25,11 @@ const LoginScreen = ({navigation}) => {
     const handleSubmitButton = () => {
       setErrortext('');
       if (!username) {
-        alert('Vui lòng nhập email');
+        showAlert("Vui lòng nhập email");
         return;
       }
       if (!password) {
-        alert('Vui lòng nhập mật khẩu');
+        showAlert("Vui lòng nhập mật khẩu");
         return;
       }
       setLoading(true);
@@ -42,7 +44,7 @@ const LoginScreen = ({navigation}) => {
             await getUserInfo(username);
 
           } else {
-            alert('Đăng nhập không thành công');
+            showAlert("Đăng nhập không thành công");
           }
         } catch (error) {
           console.error('Error during login:', error);

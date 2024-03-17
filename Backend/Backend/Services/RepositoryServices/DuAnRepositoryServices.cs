@@ -13,7 +13,7 @@ namespace Backend.Services.RepositoryServices
         public async Task<Duan?> FindByIdAsync(int maDuAn)
         {
             return (await _context.Set<Duan>()
-                .Include(Duan => Duan.NguoidungDuans)
+                .Include(Duan => Duan.NguoidungDuans).ThenInclude(e => e.ManguoidungNavigation)
                 .Include(cv => cv.Congviecs)
                 .AsQueryable().SingleOrDefaultAsync(Duan => Duan.Maduan == maDuAn));
         }

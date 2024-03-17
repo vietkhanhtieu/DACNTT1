@@ -37,6 +37,8 @@ namespace Backend.Services.BussinessServices
                     maCongViec = nguoidungCongviec.Macongviec.ToString(),
                     tenCongViec = nguoidungCongviec.MacongviecNavigation.TenCv,
                     tenDuAn = congviec.MaduanNavigation.TenDa,
+                    tinhTrang = congviec.TinhtrangCv,
+                    ngayKetThucCv = congviec.NgayketthucCv
 
                 };
                 nguoiDungCongViecResponses.Add(nguoiDungCongViecResponse);

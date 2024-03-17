@@ -9,5 +9,9 @@
         public string tenDuAn { get; set; }
 
         public string nguoiDungs { get; set; }
+
+        public int tinhTrang {  get; set; }
+        public DateOnly ngayKetThucCv { get; set; }
+
     }
 }

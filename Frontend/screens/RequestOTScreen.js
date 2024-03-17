@@ -7,6 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 import Loader from '../components/Loader.js';
 import { format } from 'date-fns';
 import { fetchAPI } from '../apiConfig.js'; 
+import showAlert from '../Services/alertServices.js';
 
 
 
@@ -35,7 +36,7 @@ const App = () => {
     const handleSubmitButton = () => {
         setErrortext('');
         if (!reason) {
-          alert('Vui lòng nhập lý do yêu cầu tăng ca');
+          showAlert("Vui lòng nhập lý do yêu cầu tăng ca");
           return;
         }
         setLoading(true);

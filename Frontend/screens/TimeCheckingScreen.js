@@ -4,7 +4,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
 import { useUser } from '../components/UserContext.js';
 import { format } from 'date-fns';
-import { fetchAPI } from '../apiConfig.js'; 
+import { fetchAPI } from '../apiConfig.js';
+import showAlert from '../Services/alertServices.js'; 
 
 
 
@@ -151,7 +152,10 @@ const TimeTrackingScreen = () => {
         if (content.success == 1) {
           setCheckInTime(currentTime);
         } else {
-          alert(content.message);
+          showAlert(content.message);
+
+
+
         }
       } catch (error) {
         console.error('Error during check-in:', error);
@@ -174,7 +178,7 @@ const TimeTrackingScreen = () => {
           setCheckOutTime(currentTime);
           setTempData(difference(checkInTime, currentTime));
         } else {
-          alert(content.message);
+          showAlert(content.message);
         }
       } catch (error) {
         console.error('Error during check-in:', error);

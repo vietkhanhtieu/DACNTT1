@@ -54,6 +54,25 @@ namespace Backend.Services.BussinessServices
             }
             return duAnResponses;
         }
+
+        public async Task<List<NguoiDungInDuAnRepsoneDto>> GetNguoiDungByDuAn(int maDuan)
+        {
+            List<NguoiDungInDuAnRepsoneDto> nguoiDungInDuAnRepsoneDtos = new List<NguoiDungInDuAnRepsoneDto>();
+            Duan duan = await FindByIdAsync(maDuan);
+            if(duan != null)
+            {
+                foreach(NguoidungDuan nguoidungDuan in duan.NguoidungDuans)
+                {
+                    NguoiDungInDuAnRepsoneDto nguoiDungInDuAnRepsoneDto = new NguoiDungInDuAnRepsoneDto
+                    {
+                        MaNguoiDung = nguoidungDuan.Manguoidung,
+                        HoTen = nguoidungDuan.ManguoidungNavigation.Hoten
+                    };
+                    nguoiDungInDuAnRepsoneDtos.Add(nguoiDungInDuAnRepsoneDto);
+                }
+            }
+            return nguoiDungInDuAnRepsoneDtos;
+        }
         public async Task<PostDto> AddDuAn(DuAnRequest duAnRequest)
         {
             PostDto result = new PostDto();

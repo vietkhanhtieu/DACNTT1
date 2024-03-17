@@ -8,6 +8,8 @@ import Loader from '../components/Loader.js';
 import { format } from 'date-fns';
 import { Dropdown } from 'react-native-element-dropdown';
 import { fetchAPI } from '../apiConfig.js'; 
+import showAlert from '../Services/alertServices.js';
+
 
 
 
@@ -37,7 +39,8 @@ const App = () => {
     const handleSubmitButton = () => {
         //setErrortext('');
         if (!reason) {
-          alert('Vui lòng nhập lý do yêu cầu nghỉ phép');
+          showAlert("Vui lòng nhập lý do yêu cầu nghỉ phép");
+
           return;
         }
         //setLoading(true);
@@ -55,9 +58,6 @@ const App = () => {
             setLoading(false);
             navigation.push('BussinessScreen');
           } 
-          // else{
-          //   alert(content.message)
-          // }
         })()
     };
     const data = [

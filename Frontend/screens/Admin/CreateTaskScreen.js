@@ -8,6 +8,7 @@ import { useUser } from '../../components/UserContext.js';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { fetchAPI } from '../../apiConfig.js'; 
+import showAlert from '../../Services/alertServices.js';
 
 
 
@@ -16,7 +17,6 @@ import { fetchAPI } from '../../apiConfig.js';
 const TaskDetailScreen = ({ route }) => {
     const navigation = useNavigation();
     const {id} = route.params;
-    console.log(id)
     const [fromDate, setFromDate] = useState(new Date());
     const [toDate, setToDate] = useState(new Date());
     const [showFromDatePicker, setShowFromDatePicker] = useState(false);
@@ -33,11 +33,12 @@ const TaskDetailScreen = ({ route }) => {
     useEffect(() => {
         const fetchData = async () => {
           try {
-            const data = await fetchAPI(`Nguoidung/getAll`);
+            const data = await fetchAPI(`DuAn/NguoiDung?maDuAn=${id}`);
             setData(data);
+            console.log(data);
             const items = data.map(user => ({
-              label: user.hoten,
-              value: user.manguoidung.toString(), // Convert to string if value expects a string
+              label: user.hoTen,
+              value: user.maNguoiDung.toString(), // Convert to string if value expects a string
             }));
               setItems(items);
           } catch (error) {
@@ -60,7 +61,8 @@ const TaskDetailScreen = ({ route }) => {
       };
       const handleSubmitButton = async () => {
         if (!reason) {
-          alert('Vui lòng nhập mô tả công việc');
+          showAlert("Vui lòng nhập mô tả công việc");
+
           return;
         }
         try {
@@ -85,8 +87,8 @@ const TaskDetailScreen = ({ route }) => {
               await assignUserToTask(element, response.id);
             }
           } else {
-            // Handle the failure scenario
-            alert('Something went wrong');
+            showAlert("Tạo công việc không thành công");
+
           }
         } catch (error) {
           // Handle the error scenario
@@ -209,7 +211,6 @@ const TaskDetailScreen = ({ route }) => {
                             max={5}
                             placeholder="Chọn nhân viên"
                             onChangeValue={(value) => {
-                            console.log(value);
                             }}
                         />
                     </View>

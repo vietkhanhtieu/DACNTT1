@@ -22,16 +22,12 @@ const YourComponent = () => {
       };
 
       const handlePressTask = (id) => {
-        console.log(id);
+       
         navigation.navigate('DetailProjectScreen', { id: id});
       };
 
 
       useEffect(() => {
-        // fetch(`http://10.35.16.127:7218/api/NguoiDungDuAn/NguoiDung?maNguoiDung=${user.manguoidung.toString()}`)
-        //   .then((response) => response.json())
-        //   .then(data => {
-        //     setTeams(data)})
         const fetchData = async () => {
           try {
             const data = await fetchAPI(`NguoiDungDuAn/NguoiDung?maNguoiDung=${user.manguoidung.toString()}`);
@@ -46,9 +42,8 @@ const YourComponent = () => {
         const fetchData = async () => {
           try {
             const data = await fetchAPI(`NguoiDungCongViec/NguoiDung?maNguoiDung=${user.manguoidung.toString()}`);
-            console.log(data);
-            
-            setTasks(data)
+            const filteredData = data.filter(item => item.tinhTrang === 0 || item.tinhTrang === 1);
+            setTasks(filteredData)
           } catch (error) {
             console.error("Error fetching attendance data:", error);
           }
@@ -57,6 +52,15 @@ const YourComponent = () => {
 
         
        }, [])
+
+       const statusTast = {
+        '0': 'Đã phân công',
+        '1': 'Đang thực hiện',
+      };
+      const colorStatus = {
+        '0': 'orange',
+        '1': 'green',
+      };
     
     return (
         <ScrollView style={styles.container}>
@@ -90,9 +94,17 @@ const YourComponent = () => {
                 <View key={index} style={styles.taskWrapper}>
                     <TouchableOpacity style={styles.taskContainer} onPress={() => handlePressTask(task.maCongViec)}>
                         <Text style={styles.taskName}>{task.tenCongViec}</Text>
-                        <Text style={styles.taskPriority}>{task.user}</Text>
+                        <Text style={[styles.taskName, { color: colorStatus[task.tinhTrang] }]}>{statusTast[task.tinhTrang]}</Text>
+
+
                     </TouchableOpacity>
-                    <Text style={styles.additionalText}>Trong danh sách: {task.tenDuAn}</Text>
+                    <View style = {styles.taskDetail}>
+                        <Text style={styles.additionalText}>Trong dự án: {task.tenDuAn}</Text>
+                        <Text style={styles.additionalText}>Dealine: {task.ngayKetThucCv}</Text>
+
+                        {/* <Text style={[styles.additionalText, { color: colorStatus[task.tinhTrang] }]}>{statusTast[task.tinhTrang]}</Text> */}
+                    </View>
+                    
                 </View>
             ))}
             </ScrollView>
@@ -171,6 +183,10 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     borderWidth: 1,
     borderColor: '#EF7720'
+  },
+  taskDetail: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
 
   additionalText: {

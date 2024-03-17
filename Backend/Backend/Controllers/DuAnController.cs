@@ -42,6 +42,8 @@ namespace Backend.Controllers
             return Ok(duan);
         }
 
+
+
         [HttpPost]
         public async Task<IActionResult> AddDuAn([FromBody] DuAnRequest duAnRequest)
         {
@@ -60,6 +62,20 @@ namespace Backend.Controllers
             {
                 List<DuAnResponse> duAnResponses = await _duAnServices.GetCongViec(maDuAn);
                 return Ok(duAnResponses);
+            }
+            catch
+            {
+                return Problem();
+            }
+        }
+
+        [HttpGet("NguoiDung")]
+        public async Task<ActionResult<IEnumerable<NguoiDungInDuAnRepsoneDto>>> GetNguoiDung(int maDuAn)
+        {
+            try
+            {
+                List<NguoiDungInDuAnRepsoneDto> nguoiDungInDuAnRepsoneDtos = await _duAnServices.GetNguoiDungByDuAn(maDuAn);
+                return Ok(nguoiDungInDuAnRepsoneDtos);
             }
             catch
             {
