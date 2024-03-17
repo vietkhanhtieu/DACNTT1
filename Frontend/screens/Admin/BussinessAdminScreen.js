@@ -66,7 +66,7 @@ const LeaveApplicationScreen = () => {
     if (status === 'All') {
       return data;
     }
-    return data.filter(app => app.status === status);
+    return data.filter(app => app.trangthai === status);
   };
 
   const handlePress = (applicationId) => {
@@ -121,7 +121,6 @@ const LeaveApplicationScreen = () => {
                 </View>
             </TouchableOpacity>   
         )
-        
         })}
       </ScrollView>   
     </SafeAreaView>
