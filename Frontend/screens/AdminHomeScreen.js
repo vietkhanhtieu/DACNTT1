@@ -8,6 +8,7 @@ import { format } from 'date-fns';
 
 
 const App = () => {
+  const navigation = useNavigation();
   const [workdayText, setWorkdayText] = useState("Ngày làm việc");
   const [monthYearText, setMonthYearText] = useState("");
   const [monthText, setMonthText] = useState("");
@@ -55,8 +56,12 @@ const App = () => {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.header}>
-
-        <Text style={styles.headerText}>Số ngày công của tháng ({startDayOfMonth}/{monthText} - {endDayOfMonth}/{monthText})</Text>
+      <View style={styles.headeral}>
+            <Text style={styles.headerText}>Số ngày công của tháng ({startDayOfMonth}/{monthText} - {endDayOfMonth}/{monthText})</Text>
+            <TouchableOpacity onPress={() => navigation.navigate('LoginScreen')} style={styles.backButton}>
+              <Icon name="sign-out-alt" size={20} color="#fff" />
+            </TouchableOpacity>
+        </View>
         <Text style={styles.timeText}>{weekdaysCount}</Text>
         <View style={styles.dateInfo}>
           <View style={styles.dateBadge}>
@@ -75,7 +80,6 @@ const App = () => {
         <Text style={styles.hrText}> HỒ SƠ NHÂN SỰ</Text>
         <View style={styles.featureSection}>
             <FeatureButton imageSource={require('../assets/images/ion_folder-outline.jpg')} label="Hồ sơ nhân sự" targetScreen="ProfileManagementScreen"/>
-            <FeatureButton imageSource={require('../assets/images/profile.jpg')} label="Hợp đồng" />
         </View>
       </View>
     
@@ -126,12 +130,22 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 24,
     borderBottomRightRadius: 24,
   },
+  headeral:{
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+
+  },
   headerText: {
     fontSize: 16,
     fontWeight: 'bold',
     color: '#ffffff',
-    marginTop: 16
+  },
 
+  backButton: {
+    position: 'absolute',
+    padding: 10,
+    right: -60,
   },
   timeText: {
     fontSize: 48,

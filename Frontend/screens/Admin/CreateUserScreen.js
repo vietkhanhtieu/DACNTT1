@@ -131,6 +131,7 @@ const App = () => {
           }),
         });
         if (response.success == 1) {
+          showAlert("Tạo tài khoản thành công");
           navigation.navigate('ProfileManagementScreen');
         } else {
           showAlert(response.message);

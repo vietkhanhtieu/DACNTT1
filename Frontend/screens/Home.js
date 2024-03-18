@@ -20,6 +20,8 @@ const App = ({route}) => {
   const daysOfWeekNames = ['Chủ nhật', 'Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7'];
   const [login, setLogin] = useState({});
   const [refreshing, setRefreshing] = useState(false);
+  const navigation = useNavigation();
+
 
 
   useEffect(() => {
@@ -80,8 +82,12 @@ const App = ({route}) => {
       />
     }>
       <View style={styles.header}>
-
-        <Text style={styles.headerText}>Số giờ làm tích lũy ({startDayOfMonth}/{monthText} - {endDayOfMonth}/{monthText})</Text>
+        <View style={styles.headeral}>
+            <Text style={styles.headerText}>Số giờ làm tích lũy ({startDayOfMonth}/{monthText} - {endDayOfMonth}/{monthText})</Text>
+            <TouchableOpacity onPress={() => navigation.navigate('LoginScreen')} style={styles.backButton}>
+              <Icon name="sign-out-alt" size={20} color="#fff" />
+            </TouchableOpacity>
+        </View>
         <Text style={styles.timeText}>24:60</Text>
         <View style={styles.dateInfo}>
           <View style={styles.dateBadge}>
@@ -158,13 +164,24 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 24,
     borderBottomRightRadius: 24,
   },
+  headeral:{
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+
+  },
   headerText: {
     fontSize: 16,
     fontWeight: 'bold',
     color: '#ffffff',
-    marginTop: 16
-
   },
+
+  backButton: {
+    position: 'absolute',
+    padding: 10,
+    right: -70,
+  },
+ 
   timeText: {
     fontSize: 48,
     fontWeight: 'bold',
