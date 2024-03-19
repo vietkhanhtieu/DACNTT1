@@ -13,8 +13,8 @@ export const fetchAPI = async (endpoint, options = {}) => {
   };
 
   const response = await fetch(`${API_BASE_URL}/${endpoint}`, config);
-  if (response.headers.get('content-length') === '0' || !response.headers.get('content-type').includes('application/json')) {
+  if (response.headers.get('content-length') === '0' || !response.headers.get('content-type') || !response.headers.get('content-type').includes('application/json')) {
     return {}; 
-  }
+  }  
   return response.json();
 };
